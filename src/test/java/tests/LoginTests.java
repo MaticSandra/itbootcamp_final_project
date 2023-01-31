@@ -2,14 +2,13 @@ package tests;
 
 import com.github.javafaker.Faker;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
-public class LoginTest extends BaseTest{
+public class LoginTests extends BaseTest{
 
     HomePage homePage;
     LoginPage loginPage;
@@ -67,19 +66,30 @@ public class LoginTest extends BaseTest{
     public void login(){
         loginPage.loginForm("admin@admin.com", "12345");
         String expRoute = "/home";
-        Assert.assertTrue(driver.getCurrentUrl().contains(expRoute));
+        loginPage.waitForRoute(expRoute);
+        Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
     }
+    @Test
+    public void logout(){
+        loginPage.loginForm("admin@admin.com", "12345");
+        Assert.assertTrue(homePage.isDisplayed());
+        homePage.clickLogout();
+        String expRoute = "/login";
+        homePage.waitForRoute(expRoute);
+        Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
+        driver.get("https://vue-demo.daniel-avellaneda.com/home");
+        driver.navigate().refresh();
+        Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
 
 
 
 
-    //loginPage.login("standard_user", "secret_sauce");
-    //        String actualUrl = driver.getCurrentUrl();
-    //        Assert.assertTrue(actualUrl.contains("/inventory.html"));
-    //        driver.navigate().refresh();
-    //
-    //        actualUrl= driver.getCurrentUrl();
-    //        Assert.assertTrue(actualUrl.contains("/inventory.html"));
+
+
+
+
+
+    }
 
 
 

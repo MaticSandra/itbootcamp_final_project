@@ -20,12 +20,13 @@ public abstract class BaseTest {
         driver = new ChromeDriver();
         driverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
     }
     @BeforeMethod
     public void beforeMethod(){
-        driver.get("https://vue-demo.daniel-avellaneda.com/ ");
+        driver.get("https://vue-demo.daniel-avellaneda.com/");
     }
 
 //    @AfterClass

@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
@@ -12,6 +13,9 @@ public abstract class BasePage {
         this.driver = driver;
         this.driverWait = driverWait;
         PageFactory.initElements(this.driver, this);
+    }
+    public void waitForRoute(String text){
+        driverWait.until(ExpectedConditions.urlContains(text));
     }
 
 }
