@@ -22,8 +22,6 @@ public class SignupPage extends BasePage{
     private WebElement form;
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]/ul/li")
     private WebElement errorAlreadyExist;
-    @FindBy(className = "v-card__title")
-    private WebElement importantMessage;
 
     public SignupPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
@@ -48,6 +46,7 @@ public class SignupPage extends BasePage{
     public WebElement getSignMeUpButton() {
         return signMeUpButton;
     }
+
     public void signUpForm(String name, String email, String password, String confirmPasswordInp){
         inputSignupName.sendKeys(name);
         inputSignupEmail.sendKeys(email);
@@ -58,11 +57,5 @@ public class SignupPage extends BasePage{
     public String getMessageAlreadyExist(){
         return errorAlreadyExist.getText();
     }
-    public String getImportantMessage(){
-        return importantMessage.getText();
-    }
 
-    public void waitForSignupImportant(){
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("v-card__title")));
-    }
 }

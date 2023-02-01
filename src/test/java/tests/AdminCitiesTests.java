@@ -9,60 +9,66 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.AdminCitiesPage;
 import pages.HomePage;
+import pages.LandingPage;
 import pages.LoginPage;
 
 public class AdminCitiesTests extends BaseTest{
 
+    LandingPage landingPage;
     HomePage homePage;
     LoginPage loginPage;
     AdminCitiesPage adminCitiesPage;
+
+    private static final String NOVISAD = "Novi Sad";
 
     @BeforeClass
     @Override
     public void beforeClass() {
         super.beforeClass();
+        landingPage = new LandingPage(driver, driverWait);
         homePage = new HomePage(driver, driverWait);
         loginPage = new LoginPage(driver, driverWait);
         adminCitiesPage = new AdminCitiesPage(driver, driverWait);
     }
 
-    @BeforeMethod
-    @Override
-    public void beforeMethod() {
-        super.beforeMethod();
-        homePage.clickLoginTab();
-    }
-    @Test
-    public void visitsAdminCitiesPageAndCities(){
+    private void clickLoginTab(){
+        landingPage.clickLoginTab();
         loginPage.loginForm("admin@admin.com", "12345");
+        adminCitiesPage.waitForRoute("/home");
+    }
+
+    private void clickCitiesTab(){
         homePage.clickCitiesTabButton();
         adminCitiesPage.waitForRoute("/admin/cities");
+    }
+
+    @Test(priority = 1)
+    public void visitsAdminCitiesPageAndCities(){
+        clickLoginTab();
+        clickCitiesTab();
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/admin/cities"));
     }
 
-    @Test
+    @Test(priority = 2)
     public void createNewCity(){
-        loginPage.loginForm("admin@admin.com", "12345");
-        homePage.clickCitiesTabButton();
-        adminCitiesPage.waitForRoute("/admin/cities");
-        String cityName = faker.address().cityName();
-        adminCitiesPage.addNewCity(cityName);
+        clickCitiesTab();
+        //String cityName = "Novi Sad"; //faker.address().cityName();
+        adminCitiesPage.addNewCity(NOVISAD);
 
         String expMessageSuccessfullySaved = "Saved successfully";
         //adminCitiesPages.waitForSavedSuccessfullyMessage();
         //Assert.assertTrue(adminCitiesPages.getSavedSuccessfullyMessage().contains(expMessageSuccessfullySaved));
     }
 
-    @Test
+    @Test(priority = 3)
     public void editCity(){
+        clickCitiesTab();
+        adminCitiesPage.clickOnEditButtonForSearchedCity(NOVISAD);
+        adminCitiesPage.editCity("- edited");
 
+        String expMessageSuccessfullySaved = "Saved successfully";
+        //adminCitiesPages.waitForSavedSuccessfullyMessage();
+        //Assert.assertTrue(adminCitiesPages.getSavedSuccessfullyMessage().contains(expMessageSuccessfullySaved));
     }
-
-    /*@AfterMethod
-    public void afterMethod() {
-        if (loginPage.getIfImLoggedIn()) {
-            homePage.clickLogout();
-        }
-    }*/
 
 }

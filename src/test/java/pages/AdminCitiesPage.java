@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class AdminCitiesPage extends BasePage{
 
     @FindBy(className = "btnLogout")
@@ -15,8 +17,14 @@ public class AdminCitiesPage extends BasePage{
     @FindBy(className = "btnNewItem")
     private WebElement newItemButton;
 
-    @FindBy(className = "dlgNewEditItem")
-    private WebElement newItemForm;
+    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr")
+    private List<WebElement> cityList;
+
+    @FindBy(id = "search")
+    private WebElement search;
+
+    /*@FindBy(className = "dlgNewEditItem")
+    private WebElement newEditForm;*/
 
     @FindBy(id = "name")
     private WebElement nameInput;
@@ -31,6 +39,17 @@ public class AdminCitiesPage extends BasePage{
         super(driver, driverWait);
     }
 
+    public void clickOnEditButtonForSearchedCity(String searchCity) {
+        for (WebElement row : cityList) {
+//            WebElement cityName = row.findElement(By.cssSelector("td[2]"));
+            WebElement cityName = row.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]"));
+            if (cityName.getText().contains(searchCity)) {
+                WebElement editButton = row.findElement(By.id("edit"));
+                editButton.click();
+            }
+        }
+    }
+
     public boolean isDisplayed(){
         return logoutButton.isDisplayed();
     }
@@ -39,6 +58,12 @@ public class AdminCitiesPage extends BasePage{
         newItemButton.click();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dlgNewEditItem")));
         nameInput.sendKeys(cityName);
+        saveButton.click();
+    }
+
+    public void editCity(String editText){
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dlgNewEditItem")));
+        nameInput.sendKeys(nameInput.getText() + editText);
         saveButton.click();
     }
 

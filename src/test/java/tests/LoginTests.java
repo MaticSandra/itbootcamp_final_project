@@ -7,10 +7,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import pages.LandingPage;
 import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
 
+    LandingPage landingPage;
     HomePage homePage;
     LoginPage loginPage;
 
@@ -18,6 +20,7 @@ public class LoginTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
+        landingPage = new LandingPage(driver, driverWait);
         homePage = new HomePage(driver, driverWait);
         loginPage = new LoginPage(driver, driverWait);
     }
@@ -26,7 +29,7 @@ public class LoginTests extends BaseTest {
     @Override
     public void beforeMethod() {
         super.beforeMethod();
-        homePage.clickLoginTab();
+        landingPage.clickLoginTab();
     }
 
     @Test
@@ -45,7 +48,6 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void userDontExist() {
-//        Faker faker = new Faker();
         String expErrorMessage = "User does not exists";
         String expRoute = "/login";
         String email = faker.internet().emailAddress();
@@ -53,7 +55,6 @@ public class LoginTests extends BaseTest {
         loginPage.loginForm(email, password);
         Assert.assertTrue(loginPage.getErrorMessage().contains(expErrorMessage));
         Assert.assertTrue(driver.getCurrentUrl().contains(expRoute));
-
     }
 
     @Test
@@ -82,7 +83,7 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(homePage.isDisplayed());
         homePage.clickLogout();
         String expRoute = "/login";
-        homePage.waitForRoute(expRoute);
+        loginPage.waitForRoute(expRoute);
         Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
         driver.get("https://vue-demo.daniel-avellaneda.com/home");
         driver.navigate().refresh();
@@ -95,7 +96,5 @@ public class LoginTests extends BaseTest {
             homePage.clickLogout();
         }
     }
-
-
 }
 
