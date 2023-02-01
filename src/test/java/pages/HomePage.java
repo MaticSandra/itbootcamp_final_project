@@ -13,8 +13,14 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span")
     private WebElement logOutButton;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/header/div/div[3]/a[4]/span")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/header/div/div[3]/a[4]")
     private WebElement signupButton;
+
+    @FindBy(className = "btnAdmin")
+    private WebElement adminTabButton;
+
+    @FindBy(className = "btnAdminCities")
+    private WebElement cities;
 
     public WebElement getLogginButton() {
         return logginButton;
@@ -27,7 +33,7 @@ public class HomePage extends BasePage{
     public HomePage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
-    public void clickLogin(){
+    public void clickLoginTab(){
          logginButton.click();
     }
     public boolean isDisplayed(){
@@ -40,5 +46,10 @@ public class HomePage extends BasePage{
     public void clickSignup(){
         signupButton.click();
     }
+    public void clickCitiesTabButton(){
+        adminTabButton.click();
+        cities.click();
+    }
+
 
 }

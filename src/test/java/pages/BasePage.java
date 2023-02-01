@@ -17,5 +17,4 @@ public abstract class BasePage {
     public void waitForRoute(String text){
         driverWait.until(ExpectedConditions.urlContains(text));
     }
-
 }

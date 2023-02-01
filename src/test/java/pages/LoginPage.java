@@ -23,11 +23,6 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li")
     private WebElement errorWrongPass;
 
-
-
-
-
-
     public LoginPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
@@ -39,8 +34,8 @@ public class LoginPage extends BasePage{
         return inputFieldPassword;
     }
 
-    public WebElement getLogin() {
-        return login;
+    public boolean getIfImLoggedIn() {
+        return driver.getCurrentUrl().endsWith("/home");
     }
 
     public WebElement getErrorDontExist() {
@@ -54,9 +49,9 @@ public class LoginPage extends BasePage{
         inputFieldPassword.clear();
         inputFieldPassword.sendKeys(password);
         login.click();
-
     }
-    public String getErrorMesage(){
+
+    public String getErrorMessage(){
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]")));
         return errorDontExist.getText();
     }
