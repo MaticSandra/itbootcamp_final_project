@@ -14,7 +14,8 @@ public abstract class BasePage {
         this.driverWait = driverWait;
         PageFactory.initElements(this.driver, this);
     }
-    public void waitForRoute(String text){
+
+    public void waitForRoute(String text) {
         driverWait.until(ExpectedConditions.urlContains(text));
     }
 }

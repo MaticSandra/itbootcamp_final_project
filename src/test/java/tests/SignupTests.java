@@ -15,6 +15,7 @@ public class SignupTests extends BaseTest {
     LandingPage landingPage;
     HomePage homePage;
     SignupPage signupPage;
+
     LoginPage loginPage;
 
     @BeforeClass
@@ -64,8 +65,9 @@ public class SignupTests extends BaseTest {
         signupPage.waitForRoute("/signup");
         Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
     }
+
     @Test
-    public void signup(){
+    public void signup() {
         String name = "Sandra Matic";
         String email = faker.internet().emailAddress();
         String password = "1234567";

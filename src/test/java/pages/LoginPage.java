@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
     @FindBy(id = "email")
     private WebElement inputFieldEmail;
@@ -26,6 +26,7 @@ public class LoginPage extends BasePage{
     public LoginPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
+
     public WebElement getInputFieldEmail() {
         return inputFieldEmail;
     }
@@ -43,7 +44,7 @@ public class LoginPage extends BasePage{
     }
 
 
-    public void loginForm(String email, String password){
+    public void loginForm(String email, String password) {
         inputFieldEmail.clear();
         inputFieldEmail.sendKeys(email);
         inputFieldPassword.clear();
@@ -51,11 +52,12 @@ public class LoginPage extends BasePage{
         login.click();
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]")));
         return errorDontExist.getText();
     }
-    public String getErrorWrongPassword(){
+
+    public String getErrorWrongPassword() {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div")));
         return errorWrongPass.getText();
     }

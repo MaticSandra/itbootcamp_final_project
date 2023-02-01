@@ -73,7 +73,6 @@ public class LoginTests extends BaseTest {
         String expRoute = "/home";
         loginPage.waitForRoute(expRoute);
         Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
-
     }
 
     @Test

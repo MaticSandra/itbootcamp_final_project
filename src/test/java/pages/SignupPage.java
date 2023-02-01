@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SignupPage extends BasePage{
+public class SignupPage extends BasePage {
     @FindBy(id = "name")
     private WebElement inputSignupName;
     @FindBy(id = "email")
@@ -47,14 +47,15 @@ public class SignupPage extends BasePage{
         return signMeUpButton;
     }
 
-    public void signUpForm(String name, String email, String password, String confirmPasswordInp){
+    public void signUpForm(String name, String email, String password, String confirmPasswordInp) {
         inputSignupName.sendKeys(name);
         inputSignupEmail.sendKeys(email);
         inputPassword.sendKeys(password);
         confirmPassword.sendKeys(confirmPasswordInp);
         signMeUpButton.click();
     }
-    public String getMessageAlreadyExist(){
+
+    public String getMessageAlreadyExist() {
         return errorAlreadyExist.getText();
     }
 

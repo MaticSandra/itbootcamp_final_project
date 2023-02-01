@@ -12,7 +12,7 @@ import pages.HomePage;
 import pages.LandingPage;
 import pages.LoginPage;
 
-public class AdminCitiesTests extends BaseTest{
+public class AdminCitiesTests extends BaseTest {
 
     LandingPage landingPage;
     HomePage homePage;
@@ -31,26 +31,26 @@ public class AdminCitiesTests extends BaseTest{
         adminCitiesPage = new AdminCitiesPage(driver, driverWait);
     }
 
-    private void clickLoginTab(){
+    private void clickLoginTab() {
         landingPage.clickLoginTab();
         loginPage.loginForm("admin@admin.com", "12345");
         adminCitiesPage.waitForRoute("/home");
     }
 
-    private void clickCitiesTab(){
+    private void clickCitiesTab() {
         homePage.clickCitiesTabButton();
         adminCitiesPage.waitForRoute("/admin/cities");
     }
 
     @Test(priority = 1)
-    public void visitsAdminCitiesPageAndCities(){
+    public void visitsAdminCitiesPageAndCities() {
         clickLoginTab();
         clickCitiesTab();
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/admin/cities"));
     }
 
     @Test(priority = 2)
-    public void createNewCity(){
+    public void createNewCity() {
         clickCitiesTab();
         //String cityName = "Novi Sad"; //faker.address().cityName();
         adminCitiesPage.addNewCity(NOVISAD);
@@ -61,7 +61,7 @@ public class AdminCitiesTests extends BaseTest{
     }
 
     @Test(priority = 3)
-    public void editCity(){
+    public void editCity() {
         clickCitiesTab();
         adminCitiesPage.clickOnEditButtonForSearchedCity(NOVISAD);
         adminCitiesPage.editCity("- edited");

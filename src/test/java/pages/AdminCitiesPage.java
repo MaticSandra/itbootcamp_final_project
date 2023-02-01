@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class AdminCitiesPage extends BasePage{
+public class AdminCitiesPage extends BasePage {
 
     @FindBy(className = "btnLogout")
     private WebElement logoutButton;
@@ -32,7 +32,7 @@ public class AdminCitiesPage extends BasePage{
     @FindBy(className = "btnSave")
     private WebElement saveButton;
 
-    @FindBy(className = "v-snack__content")
+    @FindBy(className = "")
     private WebElement savedSuccessfullyMessage;
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
@@ -41,7 +41,6 @@ public class AdminCitiesPage extends BasePage{
 
     public void clickOnEditButtonForSearchedCity(String searchCity) {
         for (WebElement row : cityList) {
-//            WebElement cityName = row.findElement(By.cssSelector("td[2]"));
             WebElement cityName = row.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]"));
             if (cityName.getText().contains(searchCity)) {
                 WebElement editButton = row.findElement(By.id("edit"));
@@ -50,24 +49,24 @@ public class AdminCitiesPage extends BasePage{
         }
     }
 
-    public boolean isDisplayed(){
+    public boolean isDisplayed() {
         return logoutButton.isDisplayed();
     }
 
-    public void addNewCity(String cityName){
+    public void addNewCity(String cityName) {
         newItemButton.click();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dlgNewEditItem")));
         nameInput.sendKeys(cityName);
         saveButton.click();
     }
 
-    public void editCity(String editText){
+    public void editCity(String editText) {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dlgNewEditItem")));
         nameInput.sendKeys(nameInput.getText() + editText);
         saveButton.click();
     }
 
-    public void waitForSavedSuccessfullyMessage(){
+    public void waitForSavedSuccessfullyMessage() {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("v-snack__content")));
     }
 
