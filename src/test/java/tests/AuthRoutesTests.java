@@ -24,26 +24,30 @@ public class AuthRoutesTests extends BaseTest {
 
     @Test
     public void forbidsVisitsToHomeUrlIfNotAuthenticated() {
-        driver.get("https://vue-demo.daniel-avellaneda.com/login");
+//      driver.get("https://vue-demo.daniel-avellaneda.com/login");
+        driver.navigate().to("https://vue-demo.daniel-avellaneda.com/login");
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
 
     }
 
     @Test
     public void forbidsVisitsToProfileUrlIfNotAuthenticated() {
-        driver.get("https://vue-demo.daniel-avellaneda.com/profile");
+//      driver.get("https://vue-demo.daniel-avellaneda.com/profile");
+        driver.navigate().to("https://vue-demo.daniel-avellaneda.com/profile");
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
 
     @Test
     public void forbidsVisitsToAdminCitiesUrlIfNotAuthenticated() {
-        driver.get("https://vue-demo.daniel-avellaneda.com/admin/cities");
+//      driver.get("https://vue-demo.daniel-avellaneda.com/admin/cities");
+        driver.navigate().to("https://vue-demo.daniel-avellaneda.com/admin/cities");
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
 
     @Test
     public void forbidsVisitsToAdminUsersUrlIfNotAuthenticated() {
-        driver.get("https://vue-demo.daniel-avellaneda.com/admin/users");
+//      driver.get("https://vue-demo.daniel-avellaneda.com/admin/users");
+        driver.navigate().to("https://vue-demo.daniel-avellaneda.com/admin/users");
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
 }

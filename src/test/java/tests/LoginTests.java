@@ -64,7 +64,6 @@ public class LoginTests extends BaseTest {
         String expRoute = "/login";
         Assert.assertTrue(loginPage.getErrorWrongPassword().contains(expWrongPassMessage));
         Assert.assertTrue(driver.getCurrentUrl().contains(expRoute));
-
     }
 
     @Test
