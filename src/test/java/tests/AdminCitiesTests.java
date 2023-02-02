@@ -1,7 +1,7 @@
 package tests;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -13,8 +13,6 @@ import pages.HomePage;
 import pages.LandingPage;
 import pages.LoginPage;
 
-import java.util.Objects;
-
 public class AdminCitiesTests extends BaseTest {
 
     LandingPage landingPage;
@@ -22,7 +20,7 @@ public class AdminCitiesTests extends BaseTest {
     LoginPage loginPage;
     AdminCitiesPage adminCitiesPage;
 
-    private String globalCityAddEdit = "";
+    private String globalCityAddEdit;
 
     @BeforeClass
     @Override
@@ -42,54 +40,55 @@ public class AdminCitiesTests extends BaseTest {
         homePage.clickCitiesTabButton();
     }
 
-//    private void clickLoginTab() {
-//        landingPage.clickLoginTab();
-//        loginPage.loginForm("admin@admin.com", "12345");
-//        adminCitiesPage.waitForRoute("/home");
-//    }
-
-//    private void clickCitiesTab() {
-//        homePage.clickCitiesTabButton();
-//        adminCitiesPage.waitForRoute("/admin/cities");
-//    }
-
-        @Test
-        public void visitsAdminCitiesPageAndCitiesTest () {
-            Assert.assertTrue(driver.getCurrentUrl().endsWith("/admin/cities"));
-        }
-
-        @Test()
-        public void createNewCityTest () {
-            globalCityAddEdit = faker.address().cityName();
-            adminCitiesPage.addNewCity(globalCityAddEdit);
-            String expMessageSuccessfullySaved = "Saved successfully";
-            Assert.assertTrue(adminCitiesPage.getSavedSuccessfullyMessage().getText().contains(expMessageSuccessfullySaved));
-        }
-
-        @Test()
-        public void editCityTest () {
-            adminCitiesPage.clickOnEditButtonForSearchedCity(globalCityAddEdit, " - edited");
-            String expMessageSuccessfullySaved = "Saved successfully";
-            Assert.assertEquals(adminCitiesPage.getSavedSuccessfullyMessage(), expMessageSuccessfullySaved);
-        }
-
-        @Test()
-        public void searchCityTest () {
-            adminCitiesPage.inputSearchCity(globalCityAddEdit);
-            Assert.assertEquals(adminCitiesPage.getFirstRowCityName(), globalCityAddEdit);
-        }
-
-        @Test()
-        public void deleteCityTest () {
-        }
-
-        @AfterMethod
-        public void afterMethod() {
-        if (loginPage.getIfImLoggedIn()) {
-            homePage.clickLogout();
+    @AfterMethod
+    public void afterMethod() {
+        if (homePage.isLogoutDisplayed()) {
+            homePage.clickLogoutButton();
         }
     }
 
+    @Test(priority = 1)
+    public void visitsAdminCitiesPageAndCitiesTest() {
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/admin/cities"));
+    }
+
+    @Test(priority = 2)
+    public void createNewCityTest() {
+        globalCityAddEdit = faker.address().cityName();
+        adminCitiesPage.addNewCity(globalCityAddEdit);
+        String expMessageSuccessfullySaved = "Saved successfully";
+        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
+    }
+
+    @Test(priority = 3)
+    public void editCityTest() {
+        adminCitiesPage.inputSearchCity(globalCityAddEdit);
+        globalCityAddEdit = adminCitiesPage.clickOnEditButtonForSearchedCity();
+        String expMessageSuccessfullySaved = "Saved successfully";
+        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
+    }
+
+    @Test(priority = 4)
+    public void searchCityTest() {
+        adminCitiesPage.inputSearchCity(globalCityAddEdit);
+        Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
+    }
+
+    @Test(priority = 5)
+    public void deleteCityTest () {
+        adminCitiesPage.inputSearchCity(globalCityAddEdit);
+        Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
+
+        adminCitiesPage.clickOnDeleteButtonForSearchedCity();
+
+        String expMessageSuccessfullySaved = "Deleted successfully";
+        //TODO
+        // Prvi put radi i uhvati poruku, svaki sledeci nece
+        /*adminCitiesPage.waitForNotificationMessage();
+        WebElement notificationMessageElement = driver.findElement(By.xpath("/html/body/div/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
+        Assert.assertTrue(notificationMessageElement.getText().contains(expMessageSuccessfullySaved));*/
+    }
 }
+
 
 

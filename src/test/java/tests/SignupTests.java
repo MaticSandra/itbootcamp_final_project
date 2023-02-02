@@ -78,7 +78,7 @@ public class SignupTests extends BaseTest {
         homePage.waitForSignupImportant();
         Assert.assertTrue(homePage.getImportantMessage().contains(expMessageAlreadyExist));
         homePage.getCloseDialogBtn().click();
-        homePage.clickLogout();
+        homePage.clickLogoutButton();
     }
 
 }

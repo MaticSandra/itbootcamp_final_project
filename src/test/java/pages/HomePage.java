@@ -37,11 +37,11 @@ public class HomePage extends BasePage {
         cities.click();
     }
 
-    public boolean isDisplayed() {
+    public boolean isLogoutDisplayed() {
         return logoutTabButton.isDisplayed();
     }
 
-    public void clickLogout() {
+    public void clickLogoutButton() {
         logoutTabButton.click();
     }
 

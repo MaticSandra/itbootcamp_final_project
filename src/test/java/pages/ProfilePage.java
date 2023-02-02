@@ -35,6 +35,30 @@ public class ProfilePage extends BasePage{
         super(driver, driverWait);
     }
 
+    public WebElement getNameField() {
+        return nameField;
+    }
+
+    public WebElement getPhoneField() {
+        return phoneField;
+    }
+
+    public WebElement getCityField() {
+        return cityField;
+    }
+
+    public WebElement getCountryField() {
+        return countryField;
+    }
+
+    public WebElement getTwitterField() {
+        return twitterField;
+    }
+
+    public WebElement getUrlGitHubField() {
+        return urlGitHubField;
+    }
+
     public WebElement getEmailField() {
         return emailField;
     }
@@ -43,29 +67,29 @@ public class ProfilePage extends BasePage{
         return profileSavedMessage;
     }
 
-
     public void makeMyProfile(String name, String phone, String city, String country, String urlTwitter, String urlGitHub) {
-        nameField.clear();
-        phoneField.clear();
-        cityField.clear();
-        countryField.clear();
-        twitterField.clear();
-        urlGitHubField.clear();
+        phoneField.sendKeys(Keys.CONTROL + "a");
+        phoneField.sendKeys(Keys.DELETE);
+        countryField.sendKeys(Keys.CONTROL + "a");
+        countryField.sendKeys(Keys.DELETE);
+        twitterField.sendKeys(Keys.CONTROL + "a");
+        twitterField.sendKeys(Keys.DELETE);
+        urlGitHubField.sendKeys(Keys.CONTROL + "a");
+        urlGitHubField.sendKeys(Keys.DELETE);
+        nameField.sendKeys(Keys.CONTROL + "a");
+        nameField.sendKeys(Keys.DELETE);
 
         nameField.sendKeys(name);
         phoneField.sendKeys(phone);
-        //cityField.sendKeys(Keys.SPACE, Keys.BACK_SPACE);
         cityField.sendKeys(Keys.CONTROL + "a");
         cityField.sendKeys(Keys.DELETE);
         cityField.sendKeys(city, Keys.ENTER);
         countryField.sendKeys(country);
         twitterField.sendKeys(urlTwitter);
-      //  urlGitHubField.sendKeys(urlGitHub);
+        urlGitHubField.sendKeys(urlGitHub);
 
         saveButton.click();
-
     }
-
 
 }
 

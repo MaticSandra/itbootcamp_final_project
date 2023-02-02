@@ -78,8 +78,8 @@ public class LoginTests extends BaseTest {
     public void logout() {
         loginPage.loginForm("admin@admin.com", "12345");
         homePage.waitForRoute("/home");
-        Assert.assertTrue(homePage.isDisplayed());
-        homePage.clickLogout();
+        Assert.assertTrue(homePage.isLogoutDisplayed());
+        homePage.clickLogoutButton();
         String expRoute = "/login";
         loginPage.waitForRoute(expRoute);
         Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
@@ -91,7 +91,7 @@ public class LoginTests extends BaseTest {
     @AfterMethod
     public void afterMethod() {
         if (loginPage.getIfImLoggedIn()) {
-            homePage.clickLogout();
+            homePage.clickLogoutButton();
         }
     }
 }
