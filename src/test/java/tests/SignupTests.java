@@ -13,6 +13,7 @@ import pages.SignupPage;
 public class SignupTests extends BaseTest {
 
     LandingPage landingPage;
+
     HomePage homePage;
     SignupPage signupPage;
 
@@ -33,6 +34,7 @@ public class SignupTests extends BaseTest {
         super.beforeMethod();
         landingPage.clickSignupTab();
     }
+
 
     @Test
     public void visitsTheSignupPage() {

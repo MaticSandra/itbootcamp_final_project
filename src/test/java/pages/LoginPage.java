@@ -39,10 +39,6 @@ public class LoginPage extends BasePage {
         return driver.getCurrentUrl().endsWith("/home");
     }
 
-    public WebElement getErrorDontExist() {
-        return errorDontExist;
-    }
-
 
     public void loginForm(String email, String password) {
         inputFieldEmail.clear();
@@ -52,7 +48,7 @@ public class LoginPage extends BasePage {
         login.click();
     }
 
-    public String getErrorMessage() {
+    public String getDontExistMessage() {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]")));
         return errorDontExist.getText();
     }

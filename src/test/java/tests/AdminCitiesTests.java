@@ -16,11 +16,12 @@ import pages.LoginPage;
 public class AdminCitiesTests extends BaseTest {
 
     LandingPage landingPage;
+
     HomePage homePage;
     LoginPage loginPage;
     AdminCitiesPage adminCitiesPage;
 
-    private String globalCityAddEdit;
+    private String globalCityAddEdit = "";
 
     @BeforeClass
     @Override
@@ -78,7 +79,6 @@ public class AdminCitiesTests extends BaseTest {
     public void deleteCityTest () {
         adminCitiesPage.inputSearchCity(globalCityAddEdit);
         Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
-
         adminCitiesPage.clickOnDeleteButtonForSearchedCity();
 
         String expMessageSuccessfullySaved = "Deleted successfully";

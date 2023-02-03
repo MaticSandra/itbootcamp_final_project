@@ -11,8 +11,6 @@ import java.util.List;
 
 public class AdminCitiesPage extends BasePage {
 
-    @FindBy(className = "btnLogout")
-    private WebElement logoutButton;
 
     @FindBy(className = "btnNewItem")
     private WebElement newItemButton;
@@ -42,22 +40,18 @@ public class AdminCitiesPage extends BasePage {
     public String getFirstRowCityName() {
         if (cityList.size() > 0) {
             return cityList.get(0).findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")).getText();
-            //List<WebElement> allTdElementsInRow = cityList.get(0).findElements(By.tagName("td"));
-            //WebElement cityNameElement = allTdElementsInRow.get(1);
-            //return cityNameElement.getText();
         } else {
             return "";
         }
     }
 
+
     public String clickOnEditButtonForSearchedCity() {
         WebElement editButton = cityList.get(0).findElement(By.xpath("//*[@id=\"edit\"]"));
         editButton.click();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dlgNewEditItem")));
-
-        nameInput.sendKeys(" - " + nameInput.getText() + " edited");
+        nameInput.sendKeys( " - " + nameInput.getText() +  " edited");
         saveButton.click();
-
         return nameInput.getText();
     }
 
@@ -67,30 +61,6 @@ public class AdminCitiesPage extends BasePage {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("v-dialog--active")));
         deleteDialogButton.click();
     }
-
-//    public void clickOnEditButtonForSearchedCity(String searchCity) {
-//        for (WebElement row : cityList) {
-//            List<WebElement> allTdInRow = row.findElements(By.tagName("tr"));
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//            WebElement editButton = allTdInRow.get(0).findElement(By.id("edit"));
-//            WebElement cityNameTd = allTdInRow.get(1);
-//            String cityTd = cityNameTd.getText(); ////*[@id="app"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr/td[2]
-//
-//            if (cityTd.equals(searchCity)) {
-//                editButton.click();
-////                driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dlgNewEditItem")));
-//                //globalCityAddEdit = globalCityAddEdit + " - " + nameInput.getText() + addCityText;
-//                nameInput.sendKeys( "-", nameInput.getText() + " edited ");
-//                saveButton.click();
-//                return;
-//            }
-//        }
-//    }
-
 
 
     public void addNewCity(String cityName) {

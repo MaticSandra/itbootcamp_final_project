@@ -13,6 +13,7 @@ import pages.LoginPage;
 public class LoginTests extends BaseTest {
 
     LandingPage landingPage;
+
     HomePage homePage;
     LoginPage loginPage;
 
@@ -29,7 +30,7 @@ public class LoginTests extends BaseTest {
     @Override
     public void beforeMethod() {
         super.beforeMethod();
-        landingPage.clickLoginTab();
+       landingPage.clickLoginTab();
     }
 
     @Test
@@ -53,7 +54,7 @@ public class LoginTests extends BaseTest {
         String email = faker.internet().emailAddress();
         String password = faker.internet().password();
         loginPage.loginForm(email, password);
-        Assert.assertTrue(loginPage.getErrorMessage().contains(expErrorMessage));
+        Assert.assertTrue(loginPage.getDontExistMessage().contains(expErrorMessage));
         Assert.assertTrue(driver.getCurrentUrl().contains(expRoute));
     }
 

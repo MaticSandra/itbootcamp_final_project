@@ -13,21 +13,12 @@ public class LocaleTests extends BaseTest {
 
     LandingPage landingPage;
 
-    @BeforeClass
-    @Override
-    public void beforeClass() {
-        super.beforeClass();
-        landingPage = new LandingPage(driver, driverWait);
-    }
 
-    @Test
-    public void setLocaleToEs() {
-        landingPage.getLocaleActivationButton().click();
-        landingPage.selectLanguage(LanguageE.ES);
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("display-2")));
-        String expMessage = "Página de aterrizaje";
-        Assert.assertTrue(landingPage.getHeaderMessage().getText().endsWith(expMessage));
-    }
+   @BeforeClass
+   public void beforeClass(){
+       super.beforeClass();
+       landingPage = new LandingPage(driver, driverWait);
+   }
 
     @Test
     public void setLocaleToEn() {
@@ -43,6 +34,14 @@ public class LocaleTests extends BaseTest {
         landingPage.selectLanguage(LanguageE.FR);
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("display-2")));
         String expMessage = "Page d'atterrissage";
+        Assert.assertTrue(landingPage.getHeaderMessage().getText().endsWith(expMessage));
+    }
+    @Test
+    public void setLocaleToEs() {
+        landingPage.getLocaleActivationButton().click();
+        landingPage.selectLanguage(LanguageE.ES);
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("display-2")));
+        String expMessage = "Página de aterrizaje";
         Assert.assertTrue(landingPage.getHeaderMessage().getText().endsWith(expMessage));
     }
 }

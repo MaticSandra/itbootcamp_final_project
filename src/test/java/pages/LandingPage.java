@@ -59,9 +59,7 @@ public class LandingPage extends BasePage {
         signupTabButton.click();
     }
 
-    public WebElement getLogginButton() {
-        return logginTabButton;
-    }
+
 
     public void selectLanguage(LanguageE languageE) {
         switch(languageE){
