@@ -15,6 +15,7 @@ public abstract class BaseTest {
 
     protected WebDriver driver;
     protected WebDriverWait driverWait;
+    protected LandingPage landingPage;
 
     protected Faker faker;
 
@@ -22,6 +23,7 @@ public abstract class BaseTest {
     public void beforeClass() {
         System.setProperty("webdiver.chrome.driver", "C:\\ITBootCamp\\chromedriver");
         driver = new ChromeDriver();
+        landingPage = new LandingPage(driver, driverWait);
         faker = new Faker();
         driverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
@@ -33,7 +35,6 @@ public abstract class BaseTest {
     public void beforeMethod() {
         driver.get("https://vue-demo.daniel-avellaneda.com/");
     }
-
 //    @AfterClass
 //    public void afterClass(){
 //        driver.quit();

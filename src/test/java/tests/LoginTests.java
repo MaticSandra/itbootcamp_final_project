@@ -12,8 +12,6 @@ import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
 
-    LandingPage landingPage;
-
     HomePage homePage;
     LoginPage loginPage;
 
@@ -21,7 +19,6 @@ public class LoginTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        landingPage = new LandingPage(driver, driverWait);
         homePage = new HomePage(driver, driverWait);
         loginPage = new LoginPage(driver, driverWait);
     }
@@ -38,7 +35,6 @@ public class LoginTests extends BaseTest {
         driver.getCurrentUrl();
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
-
     @Test
     public void checksInputTypes() {
         String expEmailType = "email";
@@ -74,7 +70,6 @@ public class LoginTests extends BaseTest {
         loginPage.waitForRoute(expRoute);
         Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
     }
-
     @Test
     public void logout() {
         loginPage.loginForm("admin@admin.com", "12345");

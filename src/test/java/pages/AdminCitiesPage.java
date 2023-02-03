@@ -30,12 +30,15 @@ public class AdminCitiesPage extends BasePage {
     @FindBy(className = "text--lighten3")
     private WebElement deleteDialogButton;
 
+//    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
+//    private WebElement notificationMessage;
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
-    private WebElement notificationMessage;
+    private WebElement notificationDeleteCity;
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
+
 
     public String getFirstRowCityName() {
         if (cityList.size() > 0) {
@@ -71,11 +74,11 @@ public class AdminCitiesPage extends BasePage {
     }
 
     public void waitForNotificationMessage() {
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("v-snack")));
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")));
     }
 
     public String getNotificationMessage() {
-        return notificationMessage.getText();
+        return notificationDeleteCity.getText();
     }
 
     public void inputSearchCity(String searchCity){

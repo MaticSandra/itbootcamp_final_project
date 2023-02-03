@@ -12,8 +12,6 @@ import pages.SignupPage;
 
 public class SignupTests extends BaseTest {
 
-    LandingPage landingPage;
-
     HomePage homePage;
     SignupPage signupPage;
 
@@ -23,7 +21,6 @@ public class SignupTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        landingPage = new LandingPage(driver, driverWait);
         homePage = new HomePage(driver, driverWait);
         signupPage = new SignupPage(driver, driverWait);
     }

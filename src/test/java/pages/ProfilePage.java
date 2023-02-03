@@ -28,7 +28,7 @@ public class ProfilePage extends BasePage{
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div/div[8]")
     private WebElement saveButton;
 
-    @FindBy(xpath = "/html/body/div/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]")
     private WebElement profileSavedMessage;
 
     public ProfilePage(WebDriver driver, WebDriverWait driverWait) {
@@ -68,11 +68,15 @@ public class ProfilePage extends BasePage{
     }
 
     public void makeMyProfile(String name, String phone, String city, String country, String urlTwitter, String urlGitHub) throws InterruptedException {
+       Thread.sleep(2000);
         phoneField.sendKeys(Keys.CONTROL + "a");
         phoneField.sendKeys(Keys.DELETE);
+        cityField.sendKeys(Keys.SPACE);
         cityField.sendKeys(Keys.CONTROL + "a");
-        cityField.sendKeys(Keys.DELETE);
-        cityField.sendKeys(city, Keys.ENTER);
+        cityField.sendKeys(city);
+        cityField.sendKeys(Keys.ARROW_DOWN);
+        cityField.sendKeys(Keys.ENTER);
+
         countryField.sendKeys(Keys.CONTROL + "a");
         countryField.sendKeys(Keys.DELETE);
         twitterField.sendKeys(Keys.CONTROL + "a");
@@ -81,14 +85,17 @@ public class ProfilePage extends BasePage{
         urlGitHubField.sendKeys(Keys.DELETE);
         nameField.sendKeys(Keys.CONTROL + "a");
         nameField.sendKeys(Keys.DELETE);
-
+        Thread.sleep(2000);
         phoneField.sendKeys(phone);
+        Thread.sleep(2000);
         countryField.sendKeys(country);
+        Thread.sleep(2000);
         twitterField.sendKeys(urlTwitter);
         Thread.sleep(5000);
         urlGitHubField.sendKeys(urlGitHub);
+        Thread.sleep(2000);
         nameField.sendKeys(name);
-
+        Thread.sleep(2000);
         saveButton.click();
     }
 

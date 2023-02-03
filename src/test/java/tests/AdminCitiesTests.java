@@ -15,8 +15,7 @@ import pages.LoginPage;
 
 public class AdminCitiesTests extends BaseTest {
 
-    LandingPage landingPage;
-
+//    LandingPage landingPage;
     HomePage homePage;
     LoginPage loginPage;
     AdminCitiesPage adminCitiesPage;
@@ -27,7 +26,7 @@ public class AdminCitiesTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        landingPage = new LandingPage(driver, driverWait);
+//      landingPage = new LandingPage(driver, driverWait);
         homePage = new HomePage(driver, driverWait);
         loginPage = new LoginPage(driver, driverWait);
         adminCitiesPage = new AdminCitiesPage(driver, driverWait);
@@ -82,11 +81,8 @@ public class AdminCitiesTests extends BaseTest {
         adminCitiesPage.clickOnDeleteButtonForSearchedCity();
 
         String expMessageSuccessfullySaved = "Deleted successfully";
-        //TODO
-        // Prvi put radi i uhvati poruku, svaki sledeci nece
-        /*adminCitiesPage.waitForNotificationMessage();
-        WebElement notificationMessageElement = driver.findElement(By.xpath("/html/body/div/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
-        Assert.assertTrue(notificationMessageElement.getText().contains(expMessageSuccessfullySaved));*/
+        adminCitiesPage.waitForNotificationMessage();
+        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
     }
 }
 
