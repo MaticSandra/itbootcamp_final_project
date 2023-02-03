@@ -79,11 +79,39 @@ public class AdminCitiesTests extends BaseTest {
         adminCitiesPage.inputSearchCity(globalCityAddEdit);
         Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
         adminCitiesPage.clickOnDeleteButtonForSearchedCity();
-
         String expMessageSuccessfullySaved = "Deleted successfully";
         adminCitiesPage.waitForNotificationMessage();
         Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
     }
+
+    @Test
+    public void createAndSearchCity(){
+        createNewCityTest();
+        adminCitiesPage.inputSearchCity(globalCityAddEdit);
+        Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
+
+    }
+    @Test
+    public void createSearchAndEdit(){
+        createAndSearchCity();
+        adminCitiesPage.inputSearchCity(globalCityAddEdit);
+        globalCityAddEdit = adminCitiesPage.clickOnEditButtonForSearchedCity();
+        String expMessageSuccessfullySaved = "Saved successfully";
+        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
+
+    }
+    @Test
+    public void createSearchEditAndDelete(){
+        createSearchAndEdit();
+        adminCitiesPage.inputSearchCity(globalCityAddEdit);
+        Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
+        adminCitiesPage.clickOnDeleteButtonForSearchedCity();
+        String expMessageSuccessfullySaved = "Deleted successfully";
+        adminCitiesPage.waitForNotificationMessage();
+        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
+
+    }
+
 }
 
 

@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class AdminCitiesPage extends BasePage {
-
 
     @FindBy(className = "btnNewItem")
     private WebElement newItemButton;
@@ -27,11 +27,9 @@ public class AdminCitiesPage extends BasePage {
     @FindBy(className = "btnSave")
     private WebElement saveButton;
 
-    @FindBy(className = "text--lighten3")
+    @FindBy(css = "#app > div.v-application--wrap > div > header > div > div.v-toolbar__items > button.hidden-sm-and-down.btnLogout.v-btn.v-btn--text.theme--light.v-size--default")
     private WebElement deleteDialogButton;
 
-//    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
-//    private WebElement notificationMessage;
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
     private WebElement notificationDeleteCity;
 
@@ -47,7 +45,6 @@ public class AdminCitiesPage extends BasePage {
             return "";
         }
     }
-
 
     public String clickOnEditButtonForSearchedCity() {
         WebElement editButton = cityList.get(0).findElement(By.xpath("//*[@id=\"edit\"]"));
@@ -82,6 +79,8 @@ public class AdminCitiesPage extends BasePage {
     }
 
     public void inputSearchCity(String searchCity){
+        searchInput.sendKeys(Keys.CONTROL + "a");
+        searchInput.sendKeys(Keys.DELETE);
         searchInput.sendKeys(searchCity);
     }
 

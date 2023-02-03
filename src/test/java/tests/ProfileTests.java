@@ -57,7 +57,7 @@ public class ProfileTests extends BaseTest {
 
         profilePage.makeMyProfile(name, phone, city, country, twitter, gitHub);
         Thread.sleep(5000);
-       //driverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]"))); //nije jos stigao ovde
+
         WebElement element = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]"));
         Assert.assertTrue(element.getText().contains(expMessage));
         Assert.assertEquals(profilePage.getNameField().getAttribute("value"), name);
