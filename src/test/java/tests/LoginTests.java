@@ -1,13 +1,11 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.LandingPage;
 import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
@@ -27,14 +25,20 @@ public class LoginTests extends BaseTest {
     @Override
     public void beforeMethod() {
         super.beforeMethod();
-       landingPage.clickLoginTab();
+        landingPage.clickLoginTab();
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        homePage.clickLogoutButton();
     }
 
     @Test
-    public void VisitsTheLoginPage() {
+    public void visitsTheLoginPage() {
         driver.getCurrentUrl();
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
+
     @Test
     public void checksInputTypes() {
         String expEmailType = "email";
@@ -50,8 +54,8 @@ public class LoginTests extends BaseTest {
         String email = faker.internet().emailAddress();
         String password = faker.internet().password();
         loginPage.loginForm(email, password);
-        Assert.assertTrue(loginPage.getDontExistMessage().contains(expErrorMessage));
         Assert.assertTrue(driver.getCurrentUrl().contains(expRoute));
+        Assert.assertTrue(loginPage.getDontExistMessage().contains(expErrorMessage));
     }
 
     @Test
@@ -59,8 +63,8 @@ public class LoginTests extends BaseTest {
         loginPage.loginForm("admin@admin.com", "aaddmm1");
         String expWrongPassMessage = "Wrong password";
         String expRoute = "/login";
-        Assert.assertTrue(loginPage.getErrorWrongPassword().contains(expWrongPassMessage));
         Assert.assertTrue(driver.getCurrentUrl().contains(expRoute));
+        Assert.assertTrue(loginPage.getErrorWrongPassword().contains(expWrongPassMessage));
     }
 
     @Test
@@ -70,11 +74,11 @@ public class LoginTests extends BaseTest {
         loginPage.waitForRoute(expRoute);
         Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
     }
+
     @Test
     public void logout() {
         loginPage.loginForm("admin@admin.com", "12345");
         homePage.waitForRoute("/home");
-        Assert.assertTrue(homePage.isLogoutDisplayed());
         homePage.clickLogoutButton();
         String expRoute = "/login";
         loginPage.waitForRoute(expRoute);
@@ -82,13 +86,6 @@ public class LoginTests extends BaseTest {
         driver.get("https://vue-demo.daniel-avellaneda.com/home");
         driver.navigate().refresh();
         Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        if (loginPage.getIfImLoggedIn()) {
-            homePage.clickLogoutButton();
-        }
     }
 }
 

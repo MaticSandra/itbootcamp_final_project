@@ -35,11 +35,6 @@ public class LoginPage extends BasePage {
         return inputFieldPassword;
     }
 
-    public boolean getIfImLoggedIn() {
-        return driver.getCurrentUrl().endsWith("/home");
-    }
-
-
     public void loginForm(String email, String password) {
         inputFieldEmail.clear();
         inputFieldEmail.sendKeys(email);
@@ -57,5 +52,4 @@ public class LoginPage extends BasePage {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div")));
         return errorWrongPass.getText();
     }
-
 }

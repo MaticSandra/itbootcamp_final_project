@@ -1,21 +1,16 @@
 package tests;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.LandingPage;
-import pages.LoginPage;
 import pages.SignupPage;
 
 public class SignupTests extends BaseTest {
 
     HomePage homePage;
     SignupPage signupPage;
-
-    LoginPage loginPage;
 
     @BeforeClass
     @Override
@@ -31,7 +26,6 @@ public class SignupTests extends BaseTest {
         super.beforeMethod();
         landingPage.clickSignupTab();
     }
-
 
     @Test
     public void visitsTheSignupPage() {

@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class HomePage extends BasePage {
 
     @FindBy(className = "btnProfile")
@@ -27,7 +29,6 @@ public class HomePage extends BasePage {
     @FindBy(className = "v-card__title")
     private WebElement importantMessage;
 
-
     public HomePage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
@@ -37,16 +38,12 @@ public class HomePage extends BasePage {
         cities.click();
     }
 
-    public boolean isLogoutDisplayed() {
-        return logoutTabButton.isDisplayed();
-    }
-
     public void clickLogoutButton() {
-        logoutTabButton.click();
-    }
-
-    public WebElement getLogoutTabButton() {
-        return logoutTabButton;
+        //driver.findElement(By.className("btnLogout")) - vraca gresku NoSuchElementException ako nema elementa
+        List<WebElement> listOfElements = driver.findElements(By.className("btnLogout"));
+        if (!listOfElements.isEmpty()) {
+            listOfElements.get(0).click();
+        }
     }
 
     public String getImportantMessage() {
@@ -60,7 +57,8 @@ public class HomePage extends BasePage {
     public WebElement getCloseDialogBtn() {
         return closeDialogBtn;
     }
-    public void clickMyProfilTabButton(){
+
+    public void clickMyProfilTabButton() {
         myProfilTabButton.click();
     }
 

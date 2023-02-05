@@ -1,8 +1,5 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -10,12 +7,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.AdminCitiesPage;
 import pages.HomePage;
-import pages.LandingPage;
 import pages.LoginPage;
 
 public class AdminCitiesTests extends BaseTest {
 
-//    LandingPage landingPage;
     HomePage homePage;
     LoginPage loginPage;
     AdminCitiesPage adminCitiesPage;
@@ -26,7 +21,6 @@ public class AdminCitiesTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-//      landingPage = new LandingPage(driver, driverWait);
         homePage = new HomePage(driver, driverWait);
         loginPage = new LoginPage(driver, driverWait);
         adminCitiesPage = new AdminCitiesPage(driver, driverWait);
@@ -42,25 +36,25 @@ public class AdminCitiesTests extends BaseTest {
 
     @AfterMethod
     public void afterMethod() {
-        if (homePage.isLogoutDisplayed()) {
-            homePage.clickLogoutButton();
-        }
+        homePage.clickLogoutButton();
     }
 
-    @Test(priority = 1)
+    @Test
     public void visitsAdminCitiesPageAndCitiesTest() {
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/admin/cities"));
     }
 
-    @Test(priority = 2)
-    public void createNewCityTest() {
+    @Test
+    public void createAndSearchCityTest() {
         globalCityAddEdit = faker.address().cityName();
         adminCitiesPage.addNewCity(globalCityAddEdit);
         String expMessageSuccessfullySaved = "Saved successfully";
         Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
+        adminCitiesPage.inputSearchCity(globalCityAddEdit);
+        Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
     }
 
-    @Test(priority = 3)
+    @Test(dependsOnMethods = "createAndSearchCityTest")
     public void editCityTest() {
         adminCitiesPage.inputSearchCity(globalCityAddEdit);
         globalCityAddEdit = adminCitiesPage.clickOnEditButtonForSearchedCity();
@@ -68,14 +62,14 @@ public class AdminCitiesTests extends BaseTest {
         Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
     }
 
-    @Test(priority = 4)
+    @Test(dependsOnMethods = "editCityTest")
     public void searchCityTest() {
         adminCitiesPage.inputSearchCity(globalCityAddEdit);
         Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
     }
 
-    @Test(priority = 5)
-    public void deleteCityTest () {
+    @Test(dependsOnMethods = "editCityTest")
+    public void deleteCityTest() {
         adminCitiesPage.inputSearchCity(globalCityAddEdit);
         Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
         adminCitiesPage.clickOnDeleteButtonForSearchedCity();
@@ -85,34 +79,14 @@ public class AdminCitiesTests extends BaseTest {
     }
 
     @Test
-    public void createAndSearchCity(){
-        createNewCityTest();
-        adminCitiesPage.inputSearchCity(globalCityAddEdit);
-        Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
-
-    }
-    @Test
-    public void createSearchAndEdit(){
-        createAndSearchCity();
-        adminCitiesPage.inputSearchCity(globalCityAddEdit);
+    public void createSearchAndEditCity() {
+        createAndSearchCityTest();
         globalCityAddEdit = adminCitiesPage.clickOnEditButtonForSearchedCity();
         String expMessageSuccessfullySaved = "Saved successfully";
         Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
-
     }
-    @Test
-    public void createSearchEditAndDelete(){
-        createSearchAndEdit();
-        adminCitiesPage.inputSearchCity(globalCityAddEdit);
-        Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
-        adminCitiesPage.clickOnDeleteButtonForSearchedCity();
-        String expMessageSuccessfullySaved = "Deleted successfully";
-        adminCitiesPage.waitForNotificationMessage();
-        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
-
-    }
-
 }
+
 
 
 

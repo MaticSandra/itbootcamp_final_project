@@ -2,16 +2,13 @@ package tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
 
 public class ProfileTests extends BaseTest {
-//    LandingPage landingPage;
 
     LoginPage loginPage;
     HomePage homePage;
@@ -27,6 +24,7 @@ public class ProfileTests extends BaseTest {
         signupPage = new SignupPage(driver, driverWait);
         profilePage = new ProfilePage(driver, driverWait);
     }
+
     @BeforeMethod
     @Override
     public void beforeMethod() {
@@ -44,6 +42,7 @@ public class ProfileTests extends BaseTest {
         homePage.getCloseDialogBtn().click();
         homePage.clickMyProfilTabButton();
     }
+
     @Test
     public void editsProfile() throws InterruptedException {
         signUpWithData();
@@ -52,7 +51,7 @@ public class ProfileTests extends BaseTest {
         String city = "New York";
         String country = faker.country().name();
         String twitter = "https://" + faker.internet().url();
-        String gitHub =  "https://" +faker.internet().url();
+        String gitHub = "https://" + faker.internet().url();
         String expMessage = "Profile saved successfuly";
 
         profilePage.makeMyProfile(name, phone, city, country, twitter, gitHub);

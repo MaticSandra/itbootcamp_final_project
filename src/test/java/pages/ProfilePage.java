@@ -1,15 +1,12 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ProfilePage extends BasePage{
+public class ProfilePage extends BasePage {
 
     @FindBy(id = "email")
     private WebElement emailField;
@@ -68,7 +65,7 @@ public class ProfilePage extends BasePage{
     }
 
     public void makeMyProfile(String name, String phone, String city, String country, String urlTwitter, String urlGitHub) throws InterruptedException {
-       Thread.sleep(2000);
+        Thread.sleep(2000);
         phoneField.sendKeys(Keys.CONTROL + "a");
         phoneField.sendKeys(Keys.DELETE);
         cityField.sendKeys(Keys.SPACE);
@@ -98,7 +95,6 @@ public class ProfilePage extends BasePage{
         Thread.sleep(2000);
         saveButton.click();
     }
-
 }
 
 

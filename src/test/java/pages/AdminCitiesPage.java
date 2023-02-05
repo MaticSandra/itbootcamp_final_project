@@ -27,7 +27,7 @@ public class AdminCitiesPage extends BasePage {
     @FindBy(className = "btnSave")
     private WebElement saveButton;
 
-    @FindBy(css = "#app > div.v-application--wrap > div > header > div > div.v-toolbar__items > button.hidden-sm-and-down.btnLogout.v-btn.v-btn--text.theme--light.v-size--default")
+    @FindBy(className = "text--lighten3")
     private WebElement deleteDialogButton;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
@@ -50,18 +50,17 @@ public class AdminCitiesPage extends BasePage {
         WebElement editButton = cityList.get(0).findElement(By.xpath("//*[@id=\"edit\"]"));
         editButton.click();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dlgNewEditItem")));
-        nameInput.sendKeys( " - " + nameInput.getText() +  " edited");
+        nameInput.sendKeys(" - " + nameInput.getText() + " edited");
         saveButton.click();
         return nameInput.getText();
     }
 
     public void clickOnDeleteButtonForSearchedCity() {
-        WebElement deleteRowButton = cityList.get(0).findElement(By.xpath("//*[@id=\"delete\"]"));
+        WebElement deleteRowButton = cityList.get(0).findElement(By.id("delete"));
         deleteRowButton.click();
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("v-dialog--active")));
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("text--lighten3")));
         deleteDialogButton.click();
     }
-
 
     public void addNewCity(String cityName) {
         newItemButton.click();
@@ -78,10 +77,9 @@ public class AdminCitiesPage extends BasePage {
         return notificationDeleteCity.getText();
     }
 
-    public void inputSearchCity(String searchCity){
+    public void inputSearchCity(String searchCity) {
         searchInput.sendKeys(Keys.CONTROL + "a");
         searchInput.sendKeys(Keys.DELETE);
         searchInput.sendKeys(searchCity);
     }
-
 }
