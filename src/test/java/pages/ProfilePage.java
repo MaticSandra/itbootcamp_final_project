@@ -73,7 +73,6 @@ public class ProfilePage extends BasePage {
         cityField.sendKeys(city);
         cityField.sendKeys(Keys.ARROW_DOWN);
         cityField.sendKeys(Keys.ENTER);
-
         countryField.sendKeys(Keys.CONTROL + "a");
         countryField.sendKeys(Keys.DELETE);
         twitterField.sendKeys(Keys.CONTROL + "a");

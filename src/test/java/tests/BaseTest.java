@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.LandingPage;
@@ -16,12 +15,11 @@ public abstract class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait driverWait;
     protected LandingPage landingPage;
-
     protected Faker faker;
 
     @BeforeClass
     public void beforeClass() {
-        System.setProperty("webdiver.chrome.driver", "C:\\ITBootCamp\\chromedriver");
+//        System.setProperty("webdiver.chrome.driver", "C:\\ITBootCamp\\chromedriver");
         driver = new ChromeDriver();
         landingPage = new LandingPage(driver, driverWait);
         faker = new Faker();
@@ -36,4 +34,27 @@ public abstract class BaseTest {
         driver.get("https://vue-demo.daniel-avellaneda.com/");
     }
 
+    public void getHomeUrl(){
+        driver.navigate().to("https://vue-demo.daniel-avellaneda.com/home");
+    }
+    public void getprofileUrl(){
+        driver.navigate().to("https://vue-demo.daniel-avellaneda.com/profile");
+    }
+    public void getadminCityUrl(){
+        driver.navigate().to("https://vue-demo.daniel-avellaneda.com/admin/cities");
+    }
+    public void getadminUserUrl(){
+        driver.navigate().to("https://vue-demo.daniel-avellaneda.com/admin/cities");
+    }
+    public void getloginUrl(){
+        driver.navigate().to("https://vue-demo.daniel-avellaneda.com/login");
+    }
+
+
+
+//    @AfterClass
+//    public void afterClass() throws InterruptedException {
+//        Thread.sleep(5000);
+//        driver.quit();
+//    }
 }

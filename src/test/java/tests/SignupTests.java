@@ -45,7 +45,7 @@ public class SignupTests extends BaseTest {
     }
 
     @Test
-    public void displaysErrorsWhenUserAlreadyExists() {
+    public void userAlreadyExists() {
         String name = "Test Test";
         String email = "admin@admin.com";
         String password = "123654";
