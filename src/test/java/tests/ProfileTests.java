@@ -57,14 +57,13 @@ public class ProfileTests extends BaseTest {
         profilePage.makeMyProfile(name, phone, city, country, twitter, gitHub);
         Thread.sleep(5000);
 
-        WebElement element = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]"));
-        Assert.assertTrue(element.getText().contains(expMessage));
-        Assert.assertEquals(profilePage.getNameField().getAttribute("value"), name);
-        Assert.assertEquals(profilePage.getPhoneField().getAttribute("value"), phone);
-        Assert.assertEquals(profilePage.getCityField().getAttribute("value"), city);
-        Assert.assertEquals(profilePage.getCountryField().getAttribute("value"), country);
-        Assert.assertEquals(profilePage.getTwitterField().getAttribute("value"), twitter);
-        Assert.assertEquals(profilePage.getUrlGitHubField().getAttribute("value"), gitHub);
+        Assert.assertTrue(profilePage.getProfileSavedMessage().contains(expMessage));
+        Assert.assertEquals(profilePage.getNameField(), name);
+        Assert.assertEquals(profilePage.getPhoneField(), phone);
+        Assert.assertEquals(profilePage.getCityField(), city);
+        Assert.assertEquals(profilePage.getCountryField(), country);
+        Assert.assertEquals(profilePage.getTwitterField(), twitter);
+        Assert.assertEquals(profilePage.getUrlGitHubField(), gitHub);
     }
 }
 

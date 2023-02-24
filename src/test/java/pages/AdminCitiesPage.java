@@ -76,7 +76,12 @@ public class AdminCitiesPage extends BasePage {
     public String getNotificationMessage() {
         return notificationDeleteCity.getText();
     }
-
+    public String successfullySaved(){
+        return "Saved successfully";
+    }
+    public String successfullyDeleted(){
+        return "Deleted successfully";
+    }
     public void inputSearchCity(String searchCity) {
         searchInput.sendKeys(Keys.CONTROL + "a");
         searchInput.sendKeys(Keys.DELETE);

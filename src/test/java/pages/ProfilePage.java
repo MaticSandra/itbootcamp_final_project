@@ -21,7 +21,7 @@ public class ProfilePage extends BasePage {
     @FindBy(id = "urlTwitter")
     private WebElement twitterField;
     @FindBy(id = "urlGitHub")
-    private WebElement urlGitHubField;
+    private WebElement gitHubField;
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div/div[8]")
     private WebElement saveButton;
 
@@ -32,66 +32,86 @@ public class ProfilePage extends BasePage {
         super(driver, driverWait);
     }
 
-    public WebElement getNameField() {
-        return nameField;
+
+    public String getNameField() {
+        return nameField.getAttribute("value");
     }
 
-    public WebElement getPhoneField() {
-        return phoneField;
+    public String getPhoneField() {
+        return phoneField.getAttribute("value");
     }
 
-    public WebElement getCityField() {
-        return cityField;
+    public String getCityField() {
+        return cityField.getAttribute("value");
     }
 
-    public WebElement getCountryField() {
-        return countryField;
+    public String getCountryField() {
+        return countryField.getAttribute("value");
     }
 
-    public WebElement getTwitterField() {
-        return twitterField;
+    public String getTwitterField() {
+        return twitterField.getAttribute("value");
     }
 
-    public WebElement getUrlGitHubField() {
-        return urlGitHubField;
+    public String getUrlGitHubField() {
+        return gitHubField.getAttribute("value");
     }
 
-    public WebElement getEmailField() {
-        return emailField;
+    public String getProfileSavedMessage() {
+        return profileSavedMessage.getText();
     }
 
-    public WebElement getProfileSavedMessage() {
-        return profileSavedMessage;
+    public void enterNameProfile(String name) {
+        nameField.click();
+        nameField.sendKeys(Keys.CONTROL + "a");
+        nameField.sendKeys(Keys.DELETE);
+        nameField.sendKeys(name);
     }
 
-    public void makeMyProfile(String name, String phone, String city, String country, String urlTwitter, String urlGitHub) throws InterruptedException {
-        Thread.sleep(2000);
+    public void enterPhoneNumberProfile(String number) {
+        phoneField.click();
         phoneField.sendKeys(Keys.CONTROL + "a");
         phoneField.sendKeys(Keys.DELETE);
+        phoneField.sendKeys(number);
+    }
+
+    public void enterCityProfile(String city) {
+        cityField.click();
         cityField.sendKeys(Keys.SPACE);
         cityField.sendKeys(Keys.CONTROL + "a");
         cityField.sendKeys(city);
         cityField.sendKeys(Keys.ARROW_DOWN);
         cityField.sendKeys(Keys.ENTER);
+    }
+
+    public void enterCountryProfile(String country) {
+        countryField.click();
         countryField.sendKeys(Keys.CONTROL + "a");
         countryField.sendKeys(Keys.DELETE);
+        countryField.sendKeys(country);
+    }
+
+    public void enterTwitterProfile(String twitter) {
+        twitterField.click();
         twitterField.sendKeys(Keys.CONTROL + "a");
         twitterField.sendKeys(Keys.DELETE);
-        urlGitHubField.sendKeys(Keys.CONTROL + "a");
-        urlGitHubField.sendKeys(Keys.DELETE);
-        nameField.sendKeys(Keys.CONTROL + "a");
-        nameField.sendKeys(Keys.DELETE);
-        Thread.sleep(2000);
-        phoneField.sendKeys(phone);
-        Thread.sleep(2000);
-        countryField.sendKeys(country);
-        Thread.sleep(2000);
-        twitterField.sendKeys(urlTwitter);
-        Thread.sleep(5000);
-        urlGitHubField.sendKeys(urlGitHub);
-        Thread.sleep(2000);
-        nameField.sendKeys(name);
-        Thread.sleep(2000);
+        twitterField.sendKeys(twitter);
+    }
+
+    public void entergitHubProfile(String github) {
+        gitHubField.click();
+        gitHubField.sendKeys(Keys.CONTROL + "a");
+        gitHubField.sendKeys(Keys.DELETE);
+        gitHubField.sendKeys(github);
+    }
+
+    public void makeMyProfile(String name, String phone, String city, String country, String twitter, String github) throws InterruptedException {
+        enterNameProfile(name);
+        enterPhoneNumberProfile(phone);
+        enterCityProfile(city);
+        enterCountryProfile(country);
+        enterTwitterProfile(twitter);
+        entergitHubProfile(github);
         saveButton.click();
     }
 }

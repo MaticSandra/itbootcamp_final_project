@@ -5,6 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.AdminCitiesPage;
 import pages.HomePage;
 import pages.LoginPage;
 
@@ -41,38 +42,31 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void checksInputTypes() {
-        String expEmailType = "email";
-        String expPaswordType = "password";
-        Assert.assertTrue(loginPage.getInputFieldEmail().getAttribute("type").contains(expEmailType));
-        Assert.assertTrue(loginPage.getInputFieldPassword().getAttribute("type").contains(expPaswordType));
+        Assert.assertTrue(loginPage.getInputFieldEmail().getAttribute("type").contains("email"));
+        Assert.assertTrue(loginPage.getInputFieldPassword().getAttribute("type").contains("password"));
     }
 
     @Test
     public void userDontExist() {
-        String expErrorMessage = "User does not exists";
-        String expRoute = "/login";
         String email = faker.internet().emailAddress();
         String password = faker.internet().password();
         loginPage.loginForm(email, password);
-        Assert.assertTrue(driver.getCurrentUrl().contains(expRoute));
-        Assert.assertTrue(loginPage.getDontExistMessage().contains(expErrorMessage));
+        Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
+        Assert.assertTrue(loginPage.getDontExistMessage().contains("User does not exists"));
     }
 
     @Test
     public void displaysErrorsWrongPassword() {
         loginPage.loginForm("admin@admin.com", "aaddmm1");
-        String expWrongPassMessage = "Wrong password";
-        String expRoute = "/login";
-        Assert.assertTrue(driver.getCurrentUrl().contains(expRoute));
-        Assert.assertTrue(loginPage.getErrorWrongPassword().contains(expWrongPassMessage));
+        Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
+        Assert.assertTrue(loginPage.getErrorWrongPassword().contains("Wrong password"));
     }
 
     @Test
     public void login() {
         loginPage.loginForm("admin@admin.com", "12345");
-        String expRoute = "/home";
-        loginPage.waitForRoute(expRoute);
-        Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
+        loginPage.waitForRoute("/home");
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/home"));
     }
 
     @Test
@@ -80,12 +74,11 @@ public class LoginTests extends BaseTest {
         loginPage.loginForm("admin@admin.com", "12345");
         homePage.waitForRoute("/home");
         homePage.clickLogoutButton();
-        String expRoute = "/login";
-        loginPage.waitForRoute(expRoute);
-        Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
-        driver.get("https://vue-demo.daniel-avellaneda.com/home");
+        loginPage.waitForRoute("/login");
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
+        getHomeUrl();
         driver.navigate().refresh();
-        Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
 }
 

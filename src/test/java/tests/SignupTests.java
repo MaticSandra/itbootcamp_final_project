@@ -29,19 +29,18 @@ public class SignupTests extends BaseTest {
 
     @Test
     public void visitsTheSignupPage() {
-        String expRoute = "/signup";
-        homePage.waitForRoute(expRoute);
-        Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
+        signupPage.waitForRoute("/signup");
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/signup"));
     }
 
     @Test
     public void checkInputTypes() {
-        String expEmailType = "email";
-        String expPasswordType = "password";
+        String email = "email";
+        String password = "password";
         signupPage.waitForRoute("/signup");
-        Assert.assertTrue(signupPage.getInputSignupEmail().getAttribute("type").contains(expEmailType));
-        Assert.assertTrue(signupPage.getInputPassword().getAttribute("type").contains(expPasswordType));
-        Assert.assertTrue(signupPage.getInputPassword().getAttribute("type").contains(expPasswordType));
+        Assert.assertTrue(signupPage.getInputSignupEmail().getAttribute("type").contains(email));
+        Assert.assertTrue(signupPage.getInputPassword().getAttribute("type").contains(password));
+        Assert.assertTrue(signupPage.getInputPassword().getAttribute("type").contains(password));
     }
 
     @Test
@@ -50,13 +49,11 @@ public class SignupTests extends BaseTest {
         String email = "admin@admin.com";
         String password = "123654";
         String confirm = "123654";
-        String expMessage = "E-mail already exists";
-        String expRoute = "/signup";
         signupPage.signUpForm(name, email, password, confirm);
 
-        Assert.assertTrue(signupPage.getMessageAlreadyExist().contains(expMessage));
+        Assert.assertTrue(signupPage.getMessageAlreadyExist().contains("E-mail already exists"));
         signupPage.waitForRoute("/signup");
-        Assert.assertTrue(driver.getCurrentUrl().endsWith(expRoute));
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/signup"));
     }
 
     @Test
@@ -65,11 +62,9 @@ public class SignupTests extends BaseTest {
         String email = faker.internet().emailAddress();
         String password = "1234567";
         String confirm = password;
-        String expMessageAlreadyExist = "IMPORTANT: Verify your account";
-
         signupPage.signUpForm(name, email, password, confirm);
         homePage.waitForSignupImportant();
-        Assert.assertTrue(homePage.getImportantMessage().contains(expMessageAlreadyExist));
+        Assert.assertTrue(homePage.getImportantMessage().contains("IMPORTANT: Verify your account"));
         homePage.getCloseDialogBtn().click();
         homePage.clickLogoutButton();
     }

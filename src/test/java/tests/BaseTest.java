@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.LandingPage;
@@ -50,11 +51,8 @@ public abstract class BaseTest {
         driver.navigate().to("https://vue-demo.daniel-avellaneda.com/login");
     }
 
-
-
-//    @AfterClass
-//    public void afterClass() throws InterruptedException {
-//        Thread.sleep(5000);
-//        driver.quit();
-//    }
+    @AfterClass
+    public void afterClass() {
+        driver.quit();
+    }
 }

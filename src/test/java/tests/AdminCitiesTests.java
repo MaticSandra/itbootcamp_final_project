@@ -48,8 +48,7 @@ public class AdminCitiesTests extends BaseTest {
     public void createAndSearchCityTest() {
         globalCityAddEdit = faker.address().cityName();
         adminCitiesPage.addNewCity(globalCityAddEdit);
-        String expMessageSuccessfullySaved = "Saved successfully";
-        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
+        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(adminCitiesPage.successfullySaved()));
         adminCitiesPage.inputSearchCity(globalCityAddEdit);
         Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
     }
@@ -58,8 +57,7 @@ public class AdminCitiesTests extends BaseTest {
     public void editCityTest() {
         adminCitiesPage.inputSearchCity(globalCityAddEdit);
         globalCityAddEdit = adminCitiesPage.clickOnEditButtonForSearchedCity();
-        String expMessageSuccessfullySaved = "Saved successfully";
-        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
+        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(adminCitiesPage.successfullySaved()));
     }
 
     @Test(dependsOnMethods = "editCityTest")
@@ -73,17 +71,15 @@ public class AdminCitiesTests extends BaseTest {
         adminCitiesPage.inputSearchCity(globalCityAddEdit);
         Assert.assertTrue(adminCitiesPage.getFirstRowCityName().contains(globalCityAddEdit));
         adminCitiesPage.clickOnDeleteButtonForSearchedCity();
-        String expMessageSuccessfullySaved = "Deleted successfully";
         adminCitiesPage.waitForNotificationMessage();
-        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
+        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(adminCitiesPage.successfullyDeleted()));
     }
 
     @Test
     public void createSearchAndEditCity() {
         createAndSearchCityTest();
         globalCityAddEdit = adminCitiesPage.clickOnEditButtonForSearchedCity();
-        String expMessageSuccessfullySaved = "Saved successfully";
-        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(expMessageSuccessfullySaved));
+        Assert.assertTrue(adminCitiesPage.getNotificationMessage().contains(adminCitiesPage.successfullySaved()));
     }
 }
 

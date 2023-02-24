@@ -24,7 +24,6 @@ public class LocaleTests extends BaseTest {
     @Test
     public void setLocaleToFr() {
         landingPage.selectLanguage(LanguageE.FR);
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("display-2")));
         String expMessage = "Page d'atterrissage";
         Assert.assertTrue(landingPage.getHeaderMessage().getText().endsWith(expMessage));
     }
@@ -32,7 +31,6 @@ public class LocaleTests extends BaseTest {
     @Test
     public void setLocaleToEs() {
         landingPage.selectLanguage(LanguageE.ES);
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("display-2")));
         String expMessage = "Página de aterrizaje";
         Assert.assertTrue(landingPage.getHeaderMessage().getText().endsWith(expMessage));
     }
